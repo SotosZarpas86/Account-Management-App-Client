@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Add Account</h2>
+<div mat-dialog-content>
+  <form [formGroup]="formInstance">
+    <div>
+      <mat-form-field hidden class="fullWidth" appearance="outline">
+        <mat-label>Id</mat-label>
+        <input matInput type="text" name="Id" formControlName="Id">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field hidden class="fullWidth" appearance="outline">
+        <mat-label>User Id</mat-label>
+        <input matInput type="text" name="UserId" formControlName="UserId">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Account Number *</mat-label>
+        <input matInput type="text" name="AccountNo" formControlName="AccountNo">
+        <mat-error *ngIf="formInstance.controls['AccountNo']?.errors?.required">Field required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Created At *</mat-label>
+        <input matInput readonly='{isDatePickerReadonly}' [matDatepicker]="picker" placeholder="Created At *" formControlName="CreatedAt">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="formInstance.controls['CreatedAt']?.errors?.required">Field required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Amount *</mat-label>
+        <input matInput type="text" name="Amount" formControlName="Amount">
+        <mat-error *ngIf="formInstance.controls['Amount']?.errors?.required">Field required</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div class="mt-5" mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="formInstance.invalid" (click)="save()"
+    cdkFocusInitial>Save</button>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</div>

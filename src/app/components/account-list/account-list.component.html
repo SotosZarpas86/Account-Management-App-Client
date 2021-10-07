@@ -1,0 +1,61 @@
+<div>
+  <p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Account Management System</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon exit-icon" aria-label="Example icon-button with exit app"
+        (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </mat-toolbar>
+  </p>
+</div>
+<div class="container">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4 d-flex">
+      <h3>{{title}}</h3>
+      <button mat-button (click)="add()">
+        <mat-icon aria-hidden="false" title="Add Account" aria-label="Example home icon">library_add</mat-icon>
+      </button>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+            <th mat-header-cell *matHeaderCellDef>
+              <div style="display: flex; align-items: center;">
+                <span mat-sort-header>{{column}}</span>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+          </ng-container>
+          <ng-container [matColumnDef]="'actions'">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button (click)="edit(element)">
+                <mat-icon mat-icon-button color='primary'>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="delete(element['Id'])">
+                <mat-icon mat-icon-button color="warn">delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+        </table>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" [length]="length" showFirstLastButtons
+          (page)="pageEvent = getMore($event)">
+        </mat-paginator>
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
+</div>
